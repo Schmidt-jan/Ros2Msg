@@ -1,0 +1,21 @@
+{
+    "name": "ros2_msg_serialization",
+    "version": "1.0.0",
+    "keywords": "ros2, serialization, messaging",
+    "description": "ROS2 message types and serialization helpers for microcontrollers",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Schmidt-jan/Ros2Msg"
+    },
+    "authors": [
+      {
+        "name": "Jan Schmidt",
+        "email": "Schmidt_Jan@outlook.com"
+      }
+    ],
+    "frameworks": "*",
+    "platforms": "*",
+    "build": {
+      "includeDir": "include"
+    }
+  }
