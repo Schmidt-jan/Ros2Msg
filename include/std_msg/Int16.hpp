@@ -2,4 +2,4 @@
 
 #include "helper.hpp"
 
-R_DEFINE_MSG_TYPE(Int16, R_int16)
+R_DEFINE_MSG_TYPE(Int16, R_Int16)

@@ -2,25 +2,25 @@
 
 #include "serde/ros2_serde.hpp"
 
-class ColorRGBA
+class ColorRGBAMsg
 {
 public:
-    R_float32 r;
-    R_float32 g;
-    R_float32 b;
-    R_float32 a;
+    R_Float32 r;
+    R_Float32 g;
+    R_Float32 b;
+    R_Float32 a;
 
-    ColorRGBA(R_float32 r, R_float32 g, R_float32 b, R_float32 a) : r(r), g(g), b(b), a(a) {}
+    ColorRGBAMsg(R_Float32 r, R_Float32 g, R_Float32 b, R_Float32 a) : r(r), g(g), b(b), a(a) {}
 
 
     size_t serialized_size() const
     {
-        return sizeof(R_float32) * 4;
+        return sizeof(R_Float32) * 4;
     }   
 
     size_t serialize(uint8_t *buffer, size_t bufSize) const
     {
-        if (bufSize < sizeof(R_float32) * 4)
+        if (bufSize < sizeof(R_Float32) * 4)
         {
             return 0;
         }
@@ -32,17 +32,17 @@ public:
         return serde.offset();
     }
 
-    static ColorRGBA *deserialize(uint8_t *buffer, size_t bufSize)
+    static ColorRGBAMsg *deserialize(uint8_t *buffer, size_t bufSize)
     {
-        if (bufSize < sizeof(R_float32) * 4)
+        if (bufSize < sizeof(R_Float32) * 4)
         {
             return nullptr;
         }
         RosSerde serde(buffer);
-        R_float32 r = serde.readFloat32();
-        R_float32 g = serde.readFloat32();
-        R_float32 b = serde.readFloat32();
-        R_float32 a = serde.readFloat32();
-        return new ColorRGBA(r, g, b, a);
+        R_Float32 r = serde.readFloat32();
+        R_Float32 g = serde.readFloat32();
+        R_Float32 b = serde.readFloat32();
+        R_Float32 a = serde.readFloat32();
+        return new ColorRGBAMsg(r, g, b, a);
     }
 };

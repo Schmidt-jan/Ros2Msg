@@ -30,9 +30,9 @@ TEST(ByteMultiArrayTest, Deserialize) {
     };
 
     ByteMultiArrayMsg *msg = ByteMultiArrayMsg::deserialize(buffer, expected_size);
-    EXPECT_EQ(msg->len, (R_uint32)2);
-    EXPECT_EQ(msg->value[0], (R_byte)0x12);
-    EXPECT_EQ(msg->value[1], (R_byte)0x42);
+    EXPECT_EQ(msg->len, (R_UInt32)2);
+    EXPECT_EQ(msg->value[0], (R_Byte)0x12);
+    EXPECT_EQ(msg->value[1], (R_Byte)0x42);
 
     delete msg;
 }

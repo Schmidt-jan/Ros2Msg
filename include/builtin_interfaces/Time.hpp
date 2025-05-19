@@ -12,6 +12,11 @@ public:
 
     TimeMsg(uint32_t sec, uint32_t nanosec) : sec(sec), nanosec(nanosec) {}
 
+    size_t serialized_size() const
+    {
+        return SERIALIZED_TIME_MSG_LEN;
+    }
+
     size_t serialize(uint8_t *buffer, size_t bufSize) const
     {
         if (bufSize < sizeof(uint32_t) * 2)
@@ -31,8 +36,8 @@ public:
             return 0;
         }
         RosSerde serde(buffer);
-        R_uint32 sec = serde.readUInt32();
-        R_uint32 nanosec = serde.readUInt32();
+        R_UInt32 sec = serde.readUInt32();
+        R_UInt32 nanosec = serde.readUInt32();
         return new TimeMsg(sec, nanosec);
     }
 };

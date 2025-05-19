@@ -38,7 +38,7 @@
 #define R_DEFINE_ARRAY_MSG_TYPE(name, type)                                                                      \
     class name##MultiArrayMsg                                                                                    \
     {                                                                                                            \
-    private:                                                                                                    \
+    private:                                                                                                     \
         bool owns_value_memory;                                                                                  \
     public:                                                                                                      \
         const type *value;                                                                                       \

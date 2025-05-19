@@ -2,6 +2,8 @@
 
 #include "serde/ros2_serde.hpp"
 
+#define SERIALIZED_DURATION_MSG_LEN (sizeof(uint32_t) * 2)
+
 class DurationMsg
 {
 public:
@@ -9,6 +11,11 @@ public:
     uint32_t nanosec;
 
     DurationMsg(uint32_t sec, uint32_t nanosec) : sec(sec), nanosec(nanosec) {}
+
+    size_t serialized_size() const
+    {
+        return SERIALIZED_DURATION_MSG_LEN;
+    }
 
     size_t serialize(uint8_t *buffer, size_t bufSize) const
     {
@@ -29,8 +36,8 @@ public:
             return 0;
         }
         RosSerde serde(buffer);
-        R_uint32 sec = serde.readUInt32();
-        R_uint32 nanosec = serde.readUInt32();
+        R_UInt32 sec = serde.readUInt32();
+        R_UInt32 nanosec = serde.readUInt32();
         return new DurationMsg(sec, nanosec);
     }
 };

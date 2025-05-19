@@ -7,28 +7,28 @@ public:
     RosSerde(uint8_t *buffer) : buffer_(buffer), offset_(0) {}
 
     // Write methods
-    void writeBool(R_bool value)            { write<R_bool>(value ? 1 : 0); }
-    void writeByte(R_byte value)            { write<R_byte>(value); }
-    void writeChar(R_char value)            { write<R_char>(value); }
-    void writeFloat32(R_float32 value)      { write<R_float32>(value); }
-    void writeFloat64(R_float64 value)      { write<R_float64>(value); }
-    void writeInt8(R_int8 value)            { write<R_int8>(value); }
-    void writeUInt8(R_uint8 value)          { write<R_uint8>(value); }
-    void writeInt16(R_int16 value)          { write<R_int16>(value); }
-    void writeUInt16(R_uint16 value)        { write<R_uint16>(value); }
-    void writeInt32(R_int32 value)          { write<R_int32>(value); }
-    void writeUInt32(R_uint32 value)        { write<R_uint32>(value); }
-    void writeInt64(R_int64 value)          { write<R_int64>(value); }
-    void writeUInt64(R_uint64 value)        { write<R_uint64>(value); }
+    void writeBool(R_Bool value)            { write<R_Bool>(value ? 1 : 0); }
+    void writeByte(R_Byte value)            { write<R_Byte>(value); }
+    void writeChar(R_Char value)            { write<R_Char>(value); }
+    void writeFloat32(R_Float32 value)      { write<R_Float32>(value); }
+    void writeFloat64(R_Float64 value)      { write<R_Float64>(value); }
+    void writeInt8(R_Int8 value)            { write<R_Int8>(value); }
+    void writeUInt8(R_UInt8 value)          { write<R_UInt8>(value); }
+    void writeInt16(R_Int16 value)          { write<R_Int16>(value); }
+    void writeUInt16(R_UInt16 value)        { write<R_UInt16>(value); }
+    void writeInt32(R_Int32 value)          { write<R_Int32>(value); }
+    void writeUInt32(R_UInt32 value)        { write<R_UInt32>(value); }
+    void writeInt64(R_Int64 value)          { write<R_Int64>(value); }
+    void writeUInt64(R_UInt64 value)        { write<R_UInt64>(value); }
 
-    void writeString(const R_string str)
+    void writeString(const R_String str)
     {
         write<uint32_t>(static_cast<uint32_t>(str.size()));
         memcpy(buffer_ + offset_, str.data(), str.size());
         offset_ += str.size();
     }
 
-    void writeWString(const R_wstring &wstr)
+    void writeWString(const R_Wstring &wstr)
     {
         uint32_t len = static_cast<uint32_t>(wstr.size());
         write<uint32_t>(len);
@@ -52,7 +52,7 @@ public:
     }
 
     // === String Array Specialization ===
-    void writeArray(const R_string *array, uint32_t count)
+    void writeArray(const R_String *array, uint32_t count)
     {
         write<uint32_t>(count);
         for (uint32_t i = 0; i < count; ++i)
@@ -60,7 +60,7 @@ public:
     }
 
     // === WString Array Specialization ===
-    void writeArray(const R_wstring *array, uint32_t count)
+    void writeArray(const R_Wstring *array, uint32_t count)
     {
         write<uint32_t>(count);
         for (uint32_t i = 0; i < count; ++i)
@@ -68,32 +68,32 @@ public:
     }
 
     // Read methods
-    R_bool readBool()       { return read<R_bool>() != 0; }
-    R_byte readByte()       { return read<R_byte>(); }
-    R_char readChar()       { return read<R_char>(); }
-    R_float32 readFloat32() { return read<R_float32>(); }
-    R_float64 readFloat64() { return read<R_float64>(); }
-    R_int8 readInt8()       { return read<R_int8>(); }
-    R_uint8 readUInt8()     { return read<R_uint8>(); }
-    R_int16 readInt16()     { return read<R_int16>(); }
-    R_uint16 readUInt16()   { return read<R_uint16>(); }
-    R_int32 readInt32()     { return read<R_int32>(); }
-    R_uint32 readUInt32()   { return read<R_uint32>(); }
-    R_int64 readInt64()     { return read<R_int64>(); }
-    R_uint64 readUInt64()   { return read<R_uint64>(); }
+    R_Bool readBool()       { return read<R_Bool>() != 0; }
+    R_Byte readByte()       { return read<R_Byte>(); }
+    R_Char readChar()       { return read<R_Char>(); }
+    R_Float32 readFloat32() { return read<R_Float32>(); }
+    R_Float64 readFloat64() { return read<R_Float64>(); }
+    R_Int8 readInt8()       { return read<R_Int8>(); }
+    R_UInt8 readUInt8()     { return read<R_UInt8>(); }
+    R_Int16 readInt16()     { return read<R_Int16>(); }
+    R_UInt16 readUInt16()   { return read<R_UInt16>(); }
+    R_Int32 readInt32()     { return read<R_Int32>(); }
+    R_UInt32 readUInt32()   { return read<R_UInt32>(); }
+    R_Int64 readInt64()     { return read<R_Int64>(); }
+    R_UInt64 readUInt64()   { return read<R_UInt64>(); }
 
-    R_string readString()
+    R_String readString()
     {
         uint32_t len = read<uint32_t>();
-        R_string str(reinterpret_cast<char *>(buffer_ + offset_), len);
+        R_String str(reinterpret_cast<char *>(buffer_ + offset_), len);
         offset_ += len;
         return str;
     }
 
-    R_wstring readWString()
+    R_Wstring readWString()
     {
         uint32_t len = read<uint32_t>();
-        R_wstring wstr(reinterpret_cast<char16_t *>(buffer_ + offset_), len);
+        R_Wstring wstr(reinterpret_cast<char16_t *>(buffer_ + offset_), len);
         offset_ += len * sizeof(char16_t);
         return wstr;
     }
@@ -114,7 +114,7 @@ public:
     }
 
     // === String Array Read ===
-    void readArray(R_string *arrayOut, uint32_t &countOut)
+    void readArray(R_String *arrayOut, uint32_t &countOut)
     {
         countOut = read<uint32_t>();
         for (uint32_t i = 0; i < countOut; ++i)
@@ -122,7 +122,7 @@ public:
     }
 
     // === WString Array Read ===
-    void readArray(R_wstring *arrayOut, uint32_t &countOut)
+    void readArray(R_Wstring *arrayOut, uint32_t &countOut)
     {
         countOut = read<uint32_t>();
         for (uint32_t i = 0; i < countOut; ++i)

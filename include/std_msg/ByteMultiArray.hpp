@@ -2,7 +2,7 @@
 
 #include "helper.hpp"
 
-// R_DEFINE_ARRAY_MSG_TYPE(Byte, R_byte)
+// R_DEFINE_ARRAY_MSG_TYPE(Byte, R_Byte)
 
 class ByteMultiArrayMsg
 {

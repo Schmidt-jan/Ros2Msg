@@ -10,10 +10,10 @@ private:
 public:
     uint32_t dim_size;
     MultiArrayDimensionMsg *dim;
-    R_uint32 data_offset;
+    R_UInt32 data_offset;
 
 
-    MultiArrayLayout(MultiArrayDimensionMsg *dim, uint32_t dim_size, R_uint32 data_offset) : dim(dim), dim_size(dim_size), data_offset(data_offset), owns_dim_memory(false) {}
+    MultiArrayLayout(MultiArrayDimensionMsg *dim, uint32_t dim_size, R_UInt32 data_offset) : dim(dim), dim_size(dim_size), data_offset(data_offset), owns_dim_memory(false) {}
 
     ~MultiArrayLayout()
     {
@@ -30,7 +30,7 @@ public:
         {
             size += dim[i].serialized_size();
         }
-        size += sizeof(R_uint32); // data_offset
+        size += sizeof(R_UInt32); // data_offset
         return size;
     }
 
@@ -96,14 +96,14 @@ public:
             serde.incrementOffset(ser_size);
         }
 
-        if (serde.offset() + sizeof(R_uint32) > bufSize)
+        if (serde.offset() + sizeof(R_UInt32) > bufSize)
         {
             // Cleanup and return nullptr if data_offset cannot be read
             delete[] dim_array;
             return nullptr;
         }
 
-        R_uint32 data_offset = serde.readUInt32();
+        R_UInt32 data_offset = serde.readUInt32();
         auto result = new MultiArrayLayout(dim_array, dim_size, data_offset);
         result->owns_dim_memory = true; // Set owns_dim_memory to true to indicate ownership of dim_array
         return result;

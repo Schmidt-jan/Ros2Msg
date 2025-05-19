@@ -22,7 +22,7 @@ TEST(MultiArrayLayoutTest, Serialize) {
     MultiArrayDimensionMsg dim1("test", 10, 20);
     MultiArrayDimensionMsg dim2("test2", 20, 40);
     MultiArrayDimensionMsg dims[] = {dim1, dim2};
-    MultiArrayLayout layout(dims, sizeof(dims) / sizeof(dims[0]), (R_uint32)28);
+    MultiArrayLayout layout(dims, sizeof(dims) / sizeof(dims[0]), (R_UInt32)28);
 
     EXPECT_EQ(layout.serialized_size(), expected_size);
 
@@ -54,14 +54,14 @@ TEST(MultiArrayLayoutTest, Deserialize) {
     };
 
     MultiArrayLayout *layout = MultiArrayLayout::deserialize(buffer, 41);
-    EXPECT_EQ(layout->dim_size, (R_uint32)2);
+    EXPECT_EQ(layout->dim_size, (R_UInt32)2);
     EXPECT_EQ(layout->dim[0].label, "test");
-    EXPECT_EQ(layout->dim[0].size, (R_uint32)10);
-    EXPECT_EQ(layout->dim[0].stride, (R_uint32)20);
+    EXPECT_EQ(layout->dim[0].size, (R_UInt32)10);
+    EXPECT_EQ(layout->dim[0].stride, (R_UInt32)20);
     EXPECT_EQ(layout->dim[1].label, "test2");
-    EXPECT_EQ(layout->dim[1].size, (R_uint32)20);
-    EXPECT_EQ(layout->dim[1].stride, (R_uint32)40);
-    EXPECT_EQ(layout->data_offset, (R_uint32)28);
+    EXPECT_EQ(layout->dim[1].size, (R_UInt32)20);
+    EXPECT_EQ(layout->dim[1].stride, (R_UInt32)40);
+    EXPECT_EQ(layout->data_offset, (R_UInt32)28);
 
     delete layout;
 }

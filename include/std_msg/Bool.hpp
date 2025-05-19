@@ -2,4 +2,4 @@
 
 #include "helper.hpp"
 
-R_DEFINE_MSG_TYPE(Bool, R_bool)
+R_DEFINE_MSG_TYPE(Bool, R_Bool)

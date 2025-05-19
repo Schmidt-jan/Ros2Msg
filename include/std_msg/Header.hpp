@@ -1,15 +1,15 @@
 #pragma once 
 
-#include "buildtin_interfaces/Time.hpp"
+#include "builtin_interfaces/Time.hpp"
 
 class HeaderMsg {
 public:
     TimeMsg stamp;
-    R_string frame_id;
-    HeaderMsg(TimeMsg stamp, R_string frame_id) : stamp(stamp), frame_id(frame_id) {}
+    R_String frame_id;
+    HeaderMsg(TimeMsg stamp, R_String frame_id) : stamp(stamp), frame_id(frame_id) {}
 
     size_t serialized_size() const {
-        return SERIALIZED_TIME_MSG_LEN + frame_id.size();
+        return stamp.serialized_size() + frame_id.size();
     }
 
     size_t serialize(uint8_t *buffer, size_t bufSize) const {
@@ -17,7 +17,7 @@ public:
             return 0;
         }
         RosSerde serde(buffer);
-        size_t len = stamp.serialize(buffer, SERIALIZED_TIME_MSG_LEN);
+        size_t len = stamp.serialize(buffer, stamp.serialized_size());
         serde.incrementOffset(len);
         serde.writeString(frame_id);
         return serde.offset();
@@ -29,10 +29,9 @@ public:
         }
         RosSerde serde(buffer);
         TimeMsg* stamp = TimeMsg::deserialize(buffer, SERIALIZED_TIME_MSG_LEN);
-        R_string frame_id = serde.readString();
+        R_String frame_id = serde.readString();
         HeaderMsg* result = new HeaderMsg(*stamp, frame_id);
         delete stamp; 
         return result;
     }
-
-}
+};

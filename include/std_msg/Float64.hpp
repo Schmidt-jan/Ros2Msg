@@ -2,4 +2,4 @@
 
 #include "helper.hpp"
 
-R_DEFINE_MSG_TYPE(Float64, R_float64)
+R_DEFINE_MSG_TYPE(Float64, R_Float64)

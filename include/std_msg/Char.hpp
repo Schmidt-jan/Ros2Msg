@@ -2,4 +2,4 @@
 
 #include "helper.hpp"
 
-R_DEFINE_MSG_TYPE(Char, R_char)
+R_DEFINE_MSG_TYPE(Char, R_Char)

@@ -10,7 +10,7 @@ TEST(MultiArrayDimensionTest, Serialize) {
         0x14, 0x00, 0x00, 0x00, // stride
     };
 
-    MultiArrayDimensionMsg d("test", 10, 20);
+    syste d("test", 10, 20);
     EXPECT_EQ(d.serialized_size(), expected_size);
 
     uint8_t buffer[d.serialized_size()];

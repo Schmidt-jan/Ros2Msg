@@ -2,4 +2,4 @@
 
 #include "helper.hpp"
 
-R_DEFINE_ARRAY_MSG_TYPE(String, R_string)
+R_DEFINE_MSG_TYPE(String, R_String)

@@ -5,6 +5,7 @@
 
 class EmptyMsg
 {
+public:
     EmptyMsg() {}
 
     size_t serialized_size() const
@@ -12,7 +13,7 @@ class EmptyMsg
         return 0;
     }
 
-    size_t serialize() const
+    size_t serialize(uint8_t *buffer, size_t bufSize) const
     {
         return 0;
     }

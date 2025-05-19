@@ -2,4 +2,4 @@
 
 #include "helper.hpp"
 
-R_DEFINE_ARRAY_MSG_TYPE(UInt32, R_uint32)
+R_DEFINE_ARRAY_MSG_TYPE(UInt32, R_UInt32)
