@@ -51,10 +51,10 @@ public:
 
     static MultiArrayLayout *deserialize(uint8_t *buffer, size_t bufSize)
     {
-        RosSerde serde(buffer);
         if (bufSize < sizeof(uint32_t))
             return nullptr;
-
+        
+        RosSerde serde(buffer);
         uint32_t dim_size = serde.readUInt32();
 
         // Allocate memory for the dimensions array
