@@ -1,3 +1,5 @@
+#ifdef ROS2MSG_PYTHON_BUILDING_ENABLED
+
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h> // <-- includes buffer support
@@ -224,3 +226,5 @@ PYBIND11_MODULE(ros2msg, m)
         .def_readwrite("nanosec", &TimeMsg::nanosec);
         
 }
+
+#endif

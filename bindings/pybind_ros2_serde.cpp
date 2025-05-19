@@ -1,3 +1,5 @@
+#ifdef ROS2MSG_PYTHON_BUILDING_ENABLED
+
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>        // <-- includes buffer support
@@ -76,3 +78,5 @@ private:
     std::unique_ptr<RosSerde> serde_;
 };
 
+
+#endif
