@@ -25,6 +25,8 @@ public:
         RosSerde serde(buffer);
         serde.writeInt16(delta_x);
         serde.writeInt16(delta_y);
+        serde.writeBool(delta_x_ovfl);
+        serde.writeBool(delta_y_ovfl);
         return serde.offset();
     }
 
@@ -36,6 +38,8 @@ public:
         DeltaMsg* msg = new DeltaMsg();
         msg->delta_x = serde.readInt16();
         msg->delta_y = serde.readInt16();
+        msg->delta_x_ovfl = serde.readBool();
+        msg->delta_y_ovfl = serde.readBool();
         return msg;
     }
 };
